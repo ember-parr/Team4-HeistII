@@ -60,8 +60,8 @@ namespace Heist_II
                         new Hacker()
                         {
                             Name = newMemberName,
-                                SkillLevel = newSkillLevel,
-                                PercentageCut = newPercentageCut
+                            SkillLevel = newSkillLevel,
+                            PercentageCut = newPercentageCut
 
                         }
                     );
@@ -73,8 +73,8 @@ namespace Heist_II
                         new Muscle()
                         {
                             Name = newMemberName,
-                                SkillLevel = newSkillLevel,
-                                PercentageCut = newPercentageCut
+                            SkillLevel = newSkillLevel,
+                            PercentageCut = newPercentageCut
 
                         }
                     );
@@ -86,8 +86,8 @@ namespace Heist_II
                         new LockSpecialist()
                         {
                             Name = newMemberName,
-                                SkillLevel = newSkillLevel,
-                                PercentageCut = newPercentageCut
+                            SkillLevel = newSkillLevel,
+                            PercentageCut = newPercentageCut
 
                         }
 
@@ -96,6 +96,76 @@ namespace Heist_II
 
                 Console.WriteLine(rolodex.Count);
             }
+
+            Bank newBank = new Bank();
+            int rand1 = new Random().Next(101);
+            int rand2 = new Random().Next(101);
+            int rand3 = new Random().Next(101);
+            int rand4 = new Random().Next(50000, 1000000);
+            newBank.AlarmScore = rand1;
+            newBank.VaultScore = rand2;
+            newBank.SecurityGuardScore = rand3;
+            newBank.CashOnHand = rand4;
+            string mostSecure;
+
+
+
+
+
+
+            if (newBank.AlarmScore == newBank.VaultScore)
+            {
+                mostSecure = "Alarm & Vault equally secure!";
+            }
+            else if (newBank.AlarmScore == newBank.SecurityGuardScore)
+            {
+                mostSecure = "Alarm & Security Guard equally secure!";
+            }
+            else if (newBank.VaultScore == newBank.SecurityGuardScore)
+            {
+                mostSecure = "Vault & Security Guard equally secure!";
+            }
+            else if (newBank.AlarmScore > newBank.VaultScore && newBank.AlarmScore > newBank.SecurityGuardScore)
+            {
+                mostSecure = "Alarm";
+            }
+            else if (newBank.VaultScore > newBank.AlarmScore && newBank.VaultScore > newBank.SecurityGuardScore)
+            {
+                mostSecure = "Vault";
+            }
+            else
+            {
+                mostSecure = "Security Guard";
+            }
+
+
+
+
+
+
+            Console.Write($@"
+/   /                                     /   /
+| O |                                     | O |
+|   |- - - - - - - - - - - - - - - - - - -|   |
+| O |                                     | O |
+|   |         R E C O N                   |   |
+| O |              R E P O R T            | O |
+|   |                                       
+| O |                                     | O |
+|   |  Most Secure: {mostSecure}    
+| O |                                     | O |
+|   |                                     |   |
+| O |                                     |   |                
+|   |                                     |   |
+| O |                                     | O |
+|   |                                     |   |
+| O |                                     | O |
+|   |                                     |   |
+| O |- - - - - - - - - - - - - - - - - - -| O |
+|   |                                     |   |
+            ");
+
+
 
         }
     }
