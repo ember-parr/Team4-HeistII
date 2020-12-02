@@ -4,15 +4,14 @@ namespace Heist_II
     {
         string Name { get; set; }
         int SkillLevel { get; set; }
-        int PercentageCut { get; set; }
+        double PercentageCut { get; set; }
 
-        public void Specialty ()
-        {
-        }
+        public void Specialty()
+        { }
 
         public void PerformSkill(Bank bank)
         {
-            
+
         }
 
     }
