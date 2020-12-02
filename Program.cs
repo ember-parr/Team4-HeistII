@@ -9,25 +9,40 @@ namespace Heist_II
         {
             Hacker hackerH1 = new Hacker();
             Hacker hackerH2 = new Hacker();
-            Hacker hackerH3 = new Hacker();
             Muscle muscelM1 = new Muscle();
             Muscle muscelM2 = new Muscle();
-            Muscle muscelM3 = new Muscle();
             LockSpecialist lockspecialist1 = new LockSpecialist();
             LockSpecialist lockspecialist2 = new LockSpecialist();
-            LockSpecialist lockspecialist3 = new LockSpecialist();
+
+            hackerH1.Name = "Braxton";
+            hackerH1.PercentageCut = 20;
+            hackerH1.SkillLevel = 60;
+            hackerH2.Name = "Lacey";
+            hackerH2.PercentageCut = 21;
+            hackerH2.SkillLevel = 61;
+            muscelM1.Name = "Adam";
+            muscelM1.PercentageCut = 2;
+            muscelM1.SkillLevel = 1;
+            muscelM2.Name = "Delta";
+            muscelM2.PercentageCut = 90;
+            muscelM2.SkillLevel = 90;
+            lockspecialist1.Name = "Ember";
+            lockspecialist1.PercentageCut = 11;
+            lockspecialist1.SkillLevel = 42;
+            lockspecialist2.Name = "Quitter Sage";
+            lockspecialist2.PercentageCut = 1;
+            lockspecialist2.SkillLevel = 1;
+
+
 
             List<IRobber> rolodex = new List<IRobber>()
             {
                 hackerH1,
                 hackerH2,
-                hackerH3,
                 muscelM1,
                 muscelM2,
-                muscelM3,
                 lockspecialist1,
-                lockspecialist2,
-                lockspecialist3
+                lockspecialist2
             };
 
             List<IRobber> crew = new List<IRobber>()
@@ -206,24 +221,60 @@ namespace Heist_II
             // |   |                                     |   |
             //             ");
 
-            foreach (IRobber robber in rolodex)
+            string newCrew = "a";
+            while (newCrew != "")
             {
-                int index = rolodex.IndexOf(robber);
-                Console.WriteLine($"Index: {index + 1}");
-                Console.WriteLine(robber.Name);
-                robber.Specialty();
-                Console.WriteLine($"{robber.Name}'s Skill Level is {robber.SkillLevel}");
-                Console.WriteLine($"{robber.Name} demands {robber.PercentageCut}% cut of the take.\n");
-            }
+                int percentageCutClaimed = 0;
+                foreach (IRobber crewMember in crew)
+                {
+                    int crewMembersCut = crewMember.PercentageCut;
+                    percentageCutClaimed += crewMembersCut;
+                }
+                Console.WriteLine($"Cut Claimed: {percentageCutClaimed}%");
 
-            Console.Write(@"Please enter index number ");
+                foreach (IRobber robber in rolodex)
+                {
+                    if (!crew.Contains(robber) && percentageCutClaimed + robber.PercentageCut < 100)
+                    {
+                        int index = rolodex.IndexOf(robber);
+                        Console.WriteLine($"Index: {index + 1}");
+                        Console.WriteLine(robber.Name);
+                        robber.Specialty();
+                        Console.WriteLine($"{robber.Name}'s Skill Level is {robber.SkillLevel}");
+                        Console.WriteLine($"{robber.Name} demands {robber.PercentageCut}% cut of the take.\n");
+                    }
+                }
 
-            int newCrew = int.Parse(Console.ReadLine());
-            crew.Add(rolodex[newCrew]);
+                while (true)
+                {
+                    Console.Write(@"Please enter index number ");
+                    newCrew = Console.ReadLine();
+                    int newCrewInt = -1;
 
-            foreach (IRobber crewMember in crew)
-            {
-                crewMember.Specialty();
+                    try
+                    {
+                        newCrewInt = int.Parse(newCrew) - 1;
+                        crew.Add(rolodex[newCrewInt]);
+                        foreach (IRobber crewMember in crew)
+                        {
+                            crewMember.Specialty();
+                        }
+                    }
+                    catch
+                    {
+                    }
+
+                    if (newCrewInt != -1)
+                    {
+                        break;
+                    }
+
+                }
+
+
+
+
+
             }
 
         }
