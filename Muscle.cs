@@ -6,7 +6,7 @@ namespace Heist_II
     {
         public string Name { get; set; }
         public int SkillLevel { get; set; }
-        public int PercentageCut { get; set; }
+        public double PercentageCut { get; set; }
 
         public void Specialty()
         {
@@ -21,6 +21,8 @@ namespace Heist_II
             {
                 Console.WriteLine($"{Name} has disabled the security guard!");
             }
+
+            bank.AlarmScore = newScore;
         }
     }
 }

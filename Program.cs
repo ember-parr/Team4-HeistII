@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Heist_II
 {
@@ -222,11 +223,11 @@ namespace Heist_II
             string newCrew = "a";
             while (newCrew != "")
             {
-                int percentageCutClaimed = 0;
+                double percentageCutClaimed = 0;
 
                 foreach (IRobber crewMember in crew)
                 {
-                    int crewMembersCut = crewMember.PercentageCut;
+                    double crewMembersCut = crewMember.PercentageCut;
                     percentageCutClaimed += crewMembersCut;
                 }
 
@@ -283,7 +284,7 @@ namespace Heist_II
 
             int totalBankScore = newBank.AlarmScore + newBank.VaultScore + newBank.SecurityGuardScore;
 
-            Console.WriteLine($"");
+            Console.WriteLine($"Total bank score prior to attack: {newBank.CashOnHand}");
 
             Console.WriteLine($"Total bank score after attack:  {totalBankScore}");
 
@@ -292,6 +293,8 @@ namespace Heist_II
                 Console.WriteLine("Heist Successful. You're rich, bitch!");
                 foreach (IRobber crewMember in crew)
                 {
+                    // Console.WriteLine(crewMember.PercentageCut);
+                    // Console.WriteLine(newBank.CashOnHand);
                     double crewMemberWinnings = (crewMember.PercentageCut / 100) * newBank.CashOnHand;
                     Console.WriteLine($"{crewMember.Name} has earned ${crewMemberWinnings}");
                 }
