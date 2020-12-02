@@ -40,7 +40,7 @@ namespace Heist_II
                     break;
                 }
 
-                Console.WriteLine(@"Please select one of the following specialties for new member: 
+                Console.Write(@"Please select one of the following specialties for new member: 
                 1. Hacker (Disables alarms)
                 2. Muscle (Disarms guards)
                 3. Lock Specialist (cracks vault)
@@ -48,10 +48,10 @@ namespace Heist_II
 
                 int newMemberType = int.Parse(Console.ReadLine());
 
-                Console.WriteLine("Enter new members skill level ( 1 - 100 )");
+                Console.Write("Enter new members skill level ( 1 - 100 ): ");
                 int newSkillLevel = int.Parse(Console.ReadLine());
 
-                Console.WriteLine("What percentage of the cut does the new member demand?");
+                Console.Write("What percentage of the cut does the new member demand? ( 1 - 100 ): ");
                 int newPercentageCut = int.Parse(Console.ReadLine());
 
                 if (newMemberType == 1)
@@ -94,9 +94,10 @@ namespace Heist_II
                     );
                 }
 
-                Console.WriteLine(rolodex.Count);
             }
+            Console.WriteLine(rolodex.Count);
 
+            // creates new bank object with random values set as security scores [ep]
             Bank newBank = new Bank();
             int rand1 = new Random().Next(101);
             int rand2 = new Random().Next(101);
@@ -106,43 +107,79 @@ namespace Heist_II
             newBank.VaultScore = rand2;
             newBank.SecurityGuardScore = rand3;
             newBank.CashOnHand = rand4;
+
+            // finds most & least secure values in newBank object for console printed report  [ep]
             string mostSecure;
+            string leastSecure;
 
-
-
-
-
-
-            if (newBank.AlarmScore == newBank.VaultScore)
-            {
-                mostSecure = "Alarm & Vault equally secure!";
-            }
-            else if (newBank.AlarmScore == newBank.SecurityGuardScore)
-            {
-                mostSecure = "Alarm & Security Guard equally secure!";
-            }
-            else if (newBank.VaultScore == newBank.SecurityGuardScore)
-            {
-                mostSecure = "Vault & Security Guard equally secure!";
-            }
-            else if (newBank.AlarmScore > newBank.VaultScore && newBank.AlarmScore > newBank.SecurityGuardScore)
+            if (newBank.AlarmScore > newBank.VaultScore && newBank.AlarmScore > newBank.SecurityGuardScore && newBank.VaultScore > newBank.SecurityGuardScore)
             {
                 mostSecure = "Alarm";
+                leastSecure = "Security Guard";
             }
-            else if (newBank.VaultScore > newBank.AlarmScore && newBank.VaultScore > newBank.SecurityGuardScore)
+            else if (newBank.AlarmScore > newBank.VaultScore && newBank.AlarmScore > newBank.SecurityGuardScore && newBank.SecurityGuardScore > newBank.VaultScore)
+            {
+                mostSecure = "Alarm";
+                leastSecure = "Vault";
+            }
+            else if (newBank.VaultScore > newBank.AlarmScore && newBank.VaultScore > newBank.SecurityGuardScore && newBank.AlarmScore > newBank.SecurityGuardScore)
             {
                 mostSecure = "Vault";
+                leastSecure = "Security Guard";
+            }
+            else if (newBank.VaultScore > newBank.AlarmScore && newBank.VaultScore > newBank.SecurityGuardScore && newBank.SecurityGuardScore > newBank.AlarmScore)
+            {
+                mostSecure = "Vault";
+                leastSecure = "Alarm";
+            }
+            else if (newBank.SecurityGuardScore > newBank.AlarmScore && newBank.SecurityGuardScore > newBank.VaultScore && newBank.VaultScore > newBank.AlarmScore)
+            {
+                mostSecure = "Security Guard";
+                leastSecure = "Alarm";
+            }
+            else if (newBank.SecurityGuardScore > newBank.AlarmScore && newBank.SecurityGuardScore > newBank.VaultScore && newBank.AlarmScore > newBank.VaultScore)
+            {
+                mostSecure = "Security Guard";
+                leastSecure = "Vault";
+            }
+            else if (newBank.SecurityGuardScore > newBank.AlarmScore && newBank.AlarmScore == newBank.VaultScore)
+            {
+                mostSecure = "Security Guard";
+                leastSecure = "Alarm & Vault are equally secure";
+            }
+            else if (newBank.AlarmScore > newBank.VaultScore && newBank.VaultScore == newBank.SecurityGuardScore)
+            {
+                mostSecure = "Alarm";
+                leastSecure = "Vault & Security Guard are equally secure";
+            }
+            else if (newBank.SecurityGuardScore < newBank.AlarmScore && newBank.AlarmScore == newBank.VaultScore)
+            {
+                mostSecure = "Alarm & Vault are equally secure";
+                leastSecure = "Security Guard";
+            }
+            else if (newBank.AlarmScore < newBank.VaultScore && newBank.VaultScore == newBank.SecurityGuardScore)
+            {
+                mostSecure = "Vault & Security Guard are equally secure";
+                leastSecure = "Alarm";
+            }
+            else if (newBank.VaultScore < newBank.AlarmScore && newBank.AlarmScore == newBank.SecurityGuardScore)
+            {
+                mostSecure = "Alarm & Security Guard are equally secure";
+                leastSecure = "Vault";
+            }
+            else if (newBank.VaultScore > newBank.AlarmScore && newBank.AlarmScore == newBank.SecurityGuardScore)
+            {
+                mostSecure = "Vault";
+                leastSecure = "Alarm & Security Guard are equally secure";
             }
             else
             {
-                mostSecure = "Security Guard";
+                mostSecure = "error";
+                leastSecure = "error";
             }
 
 
-
-
-
-
+            // prints report to console [ep]
             Console.Write($@"
 /   /                                     /   /
 | O |                                     | O |
@@ -154,7 +191,7 @@ namespace Heist_II
 | O |                                     | O |
 |   |  Most Secure: {mostSecure}    
 | O |                                     | O |
-|   |                                     |   |
+|   |  Least Secure: {leastSecure}   
 | O |                                     |   |                
 |   |                                     |   |
 | O |                                     | O |
