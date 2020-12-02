@@ -8,6 +8,11 @@ namespace Heist_II
         public int SkillLevel { get; set; }
         public int PercentageCut { get; set; }
 
+        public void Specialty () 
+        {
+            Console.WriteLine("Muscle");
+        }
+
         public void PerformSkill(Bank bank)
         {
             int newScore = bank.SecurityGuardScore - this.SkillLevel;

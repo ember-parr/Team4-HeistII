@@ -6,9 +6,13 @@ namespace Heist_II
         int SkillLevel { get; set; }
         int PercentageCut { get; set; }
 
+        public void Specialty ()
+        {
+        }
+
         public void PerformSkill(Bank bank)
         {
-
+            
         }
 
     }
