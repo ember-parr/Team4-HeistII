@@ -5,11 +5,11 @@ namespace Heist_II
     public class Bank
     {
 
-        int CashOnHand { get; set; } = 0;
-        int AlarmScore { get; set; } = 0;
-        int VaultScore { get; set; } = 0;
-        int SecurityGuardScore { get; set; } = 0;
-        bool IsSecure()
+        public int CashOnHand { get; set; } = 0;
+        public int AlarmScore { get; set; } = 0;
+        public int VaultScore { get; set; } = 0;
+        public int SecurityGuardScore { get; set; } = 0;
+        public bool IsSecure()
         {
             if (CashOnHand + AlarmScore + VaultScore + SecurityGuardScore <= 0)
             {
